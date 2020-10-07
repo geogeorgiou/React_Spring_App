@@ -1,8 +1,11 @@
 package gr.dataverse.react.spring.controller;
 
 import gr.dataverse.react.spring.entity.Employee;
+import gr.dataverse.react.spring.model.EmployeeModelRequest;
+import gr.dataverse.react.spring.model.EmployeeModelResponse;
 import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +47,14 @@ public class EmployeeController {
     public Employee update(@RequestBody Employee employee) {
         employeeService.save(employee);
         return employee;
+    }
+
+    @PostMapping("/ams/fetchData")
+    public ResponseEntity<EmployeeModelResponse> postRequestUpdate(@RequestBody EmployeeModelRequest employeeModelRequest) {
+//        List<EmployeeModel> employeeModels = employeeService.fetchEmployees();
+
+        EmployeeModelResponse employeeModelResponse = employeeService.createEmployeeResponse(employeeModelRequest);
+        return ResponseEntity.ok(employeeModelResponse);
     }
 
 }
