@@ -9,8 +9,18 @@ export const messages = {
     lastName: 'Επώνυμο',
     city: 'Πόλη',
 
+
     //dashboard controls
     dashboard: {
+
+        tableHeaders: {
+            code: 'Κωδικός',
+            name: 'Όνομα',
+            department: 'Παράρτημα',
+            dob: 'Ημ/νία',
+            gender: 'Φύλο'
+
+        },
 
         pageText: 'Αρ. Σελίδας',
         pageFrom: 'από',

@@ -9,9 +9,10 @@ import axios from 'axios';
 import clsx from "clsx";
 import {messages} from "./messages/messages";
 import makeData from "./makeData";
+import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom";
 
 // Let's simulate a large dataset on the server (outside of our component)
-const serverData = makeData(10000)
+// const serverData = makeData(10000)
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -57,18 +58,24 @@ const App = () => {
         //     }
         // }, 1000)
 
-        axios.get('https://randomuser.me/api/?results=5')
+        const jsonRequest = {
+            pageSize: pageSize,
+            pageCount: pageCount
+        }
+
+        axios.post('https://localhost:8081/ams/fetchData', jsonRequest)
             .then(response => {
 
                 //get the data from response
                 const body = response.data;
 
                 //access the JSON data from body
-                const contacts = body.results;
+                // const contacts = body.results;
+                // const contacts = body;
 
                 //set pageCount, pageSize ???
 
-                setData(contacts);
+                setData(body);
                 setLoading(false);
                 setError(false);
 
@@ -84,9 +91,10 @@ const App = () => {
     const columns = useMemo(
         () => [
             {
-                Header: messages.title,
-                accessor: 'name.title',
-                disableSortBy: true,
+                Header: messages.dashboard.tableHeaders.id,
+                accessor: 'id',
+                // accessor: 'name.title',
+                // disableSortBy: true,
                 // Filter: SelectColumnFilter,
                 // filter: 'equals',
                 // Cell: ({ cell }) => {
@@ -112,43 +120,49 @@ const App = () => {
                 // }
             },
             {
-                Header: messages.firstName,
-                accessor: 'name.first',
+                Header:  messages.dashboard.tableHeaders.name,
+                accessor: 'name',
             },
             {
-                Header: messages.lastName,
-                accessor: 'name.last',
+                Header: messages.dashboard.tableHeaders.department,
+                accessor: 'department',
             },
             {
-                Header: 'Email',
-                accessor: 'email',
+                Header: messages.dashboard.tableHeaders.dob,
+                accessor: 'dob',
             },
             {
-                Header: messages.city,
-                accessor: 'location.city',
+                Header: messages.dashboard.tableHeaders.gender,
+                accessor: 'gender',
             }
         ],
         []
     );
 
     return (
-        <Aux>
-            <DashboardNavbar/>
-            <DashboardFilterNavbar/>
-            <Container style={{ marginTop: '1rem' }}>
-                <TableContainer
-                    columns={columns}
-                    data={data}
-                    fetchData={fetchData}
-                    pageCount={pageCount}
-                    isLoading={loading}
-                    isError={error}
-                    noDataText={messages.dashboard.noDataText}
-                    noFilteredDataText={messages.dashboard.noFilteredDataText}
-                    // renderRowSubComponent={renderRowSubComponent}
-                />
-            </Container>
-        </Aux>
+        <BrowserRouter>
+
+            <Aux>
+                <DashboardNavbar/>
+                <DashboardFilterNavbar/>
+                <Container style={{ marginTop: '1rem' }}>
+                    <TableContainer
+                        columns={columns}
+                        data={data}
+                        fetchData={fetchData}
+                        pageCount={pageCount}
+                        isLoading={loading}
+                        isError={error}
+                        noDataText={messages.dashboard.noDataText}
+                        noFilteredDataText={messages.dashboard.noFilteredDataText}
+                        // renderRowSubComponent={renderRowSubComponent}
+                    />
+                </Container>
+            </Aux>
+
+            <Route path="/view" component={Container}></Route>
+
+        </BrowserRouter>
 
     );
 };
