@@ -10,11 +10,9 @@ import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +52,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        Specification<Employee> specification;
 
         List<EmployeeModel> employeeModelList = new ArrayList<>();
-        List<Employee> employeeList = employeeRepository.findAllPageable(pageable);
+        List<Employee> employeeList = employeeRepository.findAll(pageable).getContent();
+//        List<Employee> employeeList = employeeRepository.findAll(pageable);
 
         for (Employee employee : employeeList) {
             employeeModelList.add(EmployeeMapper.toEmployeeModel(employee));

@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 
     List<Employee> findAll();
-    List<Employee> findAllPageable(Pageable pageable);
+//    List<Employee> getEmployeePageable(Pageable pageable);
 //    void save(Employee emp);
     Optional<Employee> findById(int id);
     void deleteById(int id);

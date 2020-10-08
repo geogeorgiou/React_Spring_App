@@ -49,7 +49,7 @@ public class EmployeeController {
         return employee;
     }
 
-    @PostMapping("/ams/fetchData")
+    @PostMapping("/fetchData")
     public ResponseEntity<EmployeeModelResponse> postRequestUpdate(@RequestBody EmployeeModelRequest employeeModelRequest) {
 //        List<EmployeeModel> employeeModels = employeeService.fetchEmployees();
 

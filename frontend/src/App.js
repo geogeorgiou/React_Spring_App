@@ -9,10 +9,9 @@ import axios from 'axios';
 import clsx from "clsx";
 import {messages} from "./messages/messages";
 import makeData from "./makeData";
-import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom";
 
 // Let's simulate a large dataset on the server (outside of our component)
-// const serverData = makeData(10000)
+const serverData = makeData(10000)
 
 const App = () => {
     const [data, setData] = useState([]);
@@ -20,7 +19,7 @@ const App = () => {
     const [error, setError] = useState(false);
     const [pageCount, setPageCount] = useState(10); //TODO NEED TO SET THIS
 
-    // const fetchIdRef = React.useRef(0);
+    const fetchIdRef = React.useRef(0);
 
     // const doFetch = async () => {
     //     // const response = await axios.get('https://randomuser.me/api/?results=100');
@@ -37,63 +36,56 @@ const App = () => {
         // even a server. But for this example, we'll just fake it.
 
         // Give this fetch an ID
-        // const fetchId = ++fetchIdRef.current
+        const fetchId = ++fetchIdRef.current
 
         // Set the loading state
         setLoading(true);
 
         // We'll even set a delay to simulate a server here
-        // setTimeout(() => {
-        //     // Only update the data if this is the latest fetch
-        //     if (fetchId === fetchIdRef.current) {
-        //         const startRow = pageSize * pageIndex
-        //         const endRow = startRow + pageSize
-        //         setData(serverData.slice(startRow, endRow))
+        setTimeout(() => {
+            // Only update the data if this is the latest fetch
+            if (fetchId === fetchIdRef.current) {
+                const startRow = pageSize * pageIndex
+                const endRow = startRow + pageSize
+                setData(serverData.slice(startRow, endRow))
+
+                // Your server could send back total page count.
+                // For now we'll just fake it, too
+                setPageCount(Math.ceil(serverData.length / pageSize))
+
+                setLoading(false)
+            }
+        }, 1000)
+
+        // axios.get('https://randomuser.me/api/?results=5')
+        //     .then(response => {
         //
-        //         // Your server could send back total page count.
-        //         // For now we'll just fake it, too
-        //         setPageCount(Math.ceil(serverData.length / pageSize))
+        //         //get the data from response
+        //         const body = response.data;
         //
-        //         setLoading(false)
-        //     }
-        // }, 1000)
-
-        const jsonRequest = {
-            pageSize: pageSize,
-            pageCount: pageCount
-        }
-
-        axios.post('https://localhost:8081/ams/fetchData', jsonRequest)
-            .then(response => {
-
-                //get the data from response
-                const body = response.data;
-
-                //access the JSON data from body
-                // const contacts = body.results;
-                // const contacts = body;
-
-                //set pageCount, pageSize ???
-
-                setData(body);
-                setLoading(false);
-                setError(false);
-
-            })
-            .catch(() => {
-                setData([]);
-                setLoading(false);
-                setError(false);
-            });
+        //         //access the JSON data from body
+        //         const contacts = body.results;
+        //
+        //         //set pageCount, pageSize ???
+        //
+        //         setData(contacts);
+        //         setLoading(false);
+        //         setError(false);
+        //
+        //     })
+        //     .catch(() => {
+        //         setData([]);
+        //         setLoading(false);
+        //         setError(false);
+        //     });
 
     }, [])
 
     const columns = useMemo(
         () => [
             {
-                Header: messages.dashboard.tableHeaders.id,
-                accessor: 'id',
-                // accessor: 'name.title',
+                Header: messages.title,
+                accessor: 'employeeModels.id',
                 // disableSortBy: true,
                 // Filter: SelectColumnFilter,
                 // filter: 'equals',
@@ -120,49 +112,43 @@ const App = () => {
                 // }
             },
             {
-                Header:  messages.dashboard.tableHeaders.name,
-                accessor: 'name',
+                Header: messages.firstName,
+                accessor: 'employeeModels.name',
             },
             {
-                Header: messages.dashboard.tableHeaders.department,
-                accessor: 'department',
+                Header: messages.lastName,
+                accessor: 'employeeModels.department',
             },
             {
-                Header: messages.dashboard.tableHeaders.dob,
-                accessor: 'dob',
+                Header: 'Email',
+                accessor: 'employeeModels.dob',
             },
             {
-                Header: messages.dashboard.tableHeaders.gender,
-                accessor: 'gender',
+                Header: messages.city,
+                accessor: 'employeeModels.gender',
             }
         ],
         []
     );
 
     return (
-        <BrowserRouter>
-
-            <Aux>
-                <DashboardNavbar/>
-                <DashboardFilterNavbar/>
-                <Container style={{ marginTop: '1rem' }}>
-                    <TableContainer
-                        columns={columns}
-                        data={data}
-                        fetchData={fetchData}
-                        pageCount={pageCount}
-                        isLoading={loading}
-                        isError={error}
-                        noDataText={messages.dashboard.noDataText}
-                        noFilteredDataText={messages.dashboard.noFilteredDataText}
-                        // renderRowSubComponent={renderRowSubComponent}
-                    />
-                </Container>
-            </Aux>
-
-            <Route path="/view" component={Container}></Route>
-
-        </BrowserRouter>
+        <Aux>
+            <DashboardNavbar/>
+            <DashboardFilterNavbar/>
+            <Container style={{ marginTop: '1rem' }}>
+                <TableContainer
+                    columns={columns}
+                    data={data}
+                    fetchData={fetchData}
+                    pageCount={pageCount}
+                    isLoading={loading}
+                    isError={error}
+                    noDataText={messages.dashboard.noDataText}
+                    noFilteredDataText={messages.dashboard.noFilteredDataText}
+                    // renderRowSubComponent={renderRowSubComponent}
+                />
+            </Container>
+        </Aux>
 
     );
 };

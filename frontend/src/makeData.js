@@ -13,17 +13,19 @@ const range = len => {
 const newPerson = () => {
     // const statusChance = Math.random()
     return {
-        name: {
-            title: namor.generate({ words: 1, numbers: 0 }),
-            first: namor.generate({ words: 1, numbers: 0 }),
-            last: namor.generate({ words: 1, numbers: 0 })
+        employeeModels: {
+            id: namor.generate({ words: 1, numbers: 0 }),
+            name: namor.generate({ words: 1, numbers: 0 }),
+            department: namor.generate({ words: 1, numbers: 0 }),
+            dob: namor.generate({ words: 1, numbers: 0 }),
+            gender: namor.generate({ words: 1, numbers: 0 })
         },
         // name: {},
         // nameLast: namor.generate({ words: 1, numbers: 0 }),
-        email: namor.generate({ words: 1, numbers: 0 }),
-        location: {
-            city: namor.generate({ words: 1, numbers: 0 })
-        }
+        // email: namor.generate({ words: 1, numbers: 0 }),
+        // location: {
+        //     city: namor.generate({ words: 1, numbers: 0 })
+        // }
     }
 }
 
