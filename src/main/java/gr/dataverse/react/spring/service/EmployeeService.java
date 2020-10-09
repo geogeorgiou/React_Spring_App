@@ -1,9 +1,8 @@
 package gr.dataverse.react.spring.service;
 
 import gr.dataverse.react.spring.entity.Employee;
-import gr.dataverse.react.spring.model.EmployeeModelRequest;
-import gr.dataverse.react.spring.model.EmployeeModelResponse;
-import gr.dataverse.react.spring.model.EmployeeModel;
+import gr.dataverse.react.spring.model.TableFetchRequest;
+import gr.dataverse.react.spring.model.TableEmployeeFetchResponse;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +17,6 @@ public interface EmployeeService {
 
     void delete(int id);
 
-    EmployeeModelResponse createEmployeeResponse(EmployeeModelRequest employeeModelRequest);
+    TableEmployeeFetchResponse fetchEmployeeData(TableFetchRequest tableFetchRequest);
 
 }

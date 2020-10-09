@@ -1,8 +1,8 @@
 package gr.dataverse.react.spring.controller;
 
 import gr.dataverse.react.spring.entity.Employee;
-import gr.dataverse.react.spring.model.EmployeeModelRequest;
-import gr.dataverse.react.spring.model.EmployeeModelResponse;
+import gr.dataverse.react.spring.model.TableFetchRequest;
+import gr.dataverse.react.spring.model.TableEmployeeFetchResponse;
 import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,11 +50,19 @@ public class EmployeeController {
     }
 
     @PostMapping("/fetchData")
-    public ResponseEntity<EmployeeModelResponse> postRequestUpdate(@RequestBody EmployeeModelRequest employeeModelRequest) {
-//        List<EmployeeModel> employeeModels = employeeService.fetchEmployees();
+    public ResponseEntity<TableEmployeeFetchResponse> postRequestUpdate(@RequestBody TableFetchRequest tableFetchRequest) {
 
-        EmployeeModelResponse employeeModelResponse = employeeService.createEmployeeResponse(employeeModelRequest);
-        return ResponseEntity.ok(employeeModelResponse);
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+
+        TableEmployeeFetchResponse tableEmployeeFetchResponse = employeeService.fetchEmployeeData(tableFetchRequest);
+        return ResponseEntity.ok(tableEmployeeFetchResponse);
     }
 
 }

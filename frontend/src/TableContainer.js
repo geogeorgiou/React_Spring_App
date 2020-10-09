@@ -41,7 +41,7 @@ const TableContainer = ({
         canPreviousPage,
         canNextPage,
         pageOptions,
-        pageCount,
+        pageCount,  //total pages!
         gotoPage,
         nextPage,
         previousPage,
@@ -53,10 +53,10 @@ const TableContainer = ({
         {
             columns,
             data,
-            // initialState: {pageIndex: 0, pageSize: 10},
-            initialState: {pageIndex: 0},
+            initialState: {pageIndex: 0, pageSize: 1},
+            // initialState: {pageIndex: pageCount, pageSize: pageSize},
             manualPagination: true,
-            pageCount: controlledPageCount,
+            pageCount: controlledPageCount
         },
         // useFilters,
         // useSortBy,
@@ -199,7 +199,11 @@ const TableContainer = ({
                     >
                         <ChevronLeftIcon/>
                     </Button>
-                    <Button color='light' onClick={nextPage} disabled={!canNextPage}>
+                    <Button
+                        color='light'
+                        onClick={nextPage}
+                        disabled={!canNextPage}
+                    >
                         <ChevronRightIcon/>
                     </Button>
                     <Button

@@ -8,16 +8,16 @@ import axios from 'axios';
 
 import clsx from "clsx";
 import {messages} from "./messages/messages";
-import makeData from "./makeData";
+// import makeData from "./makeData";
 
 // Let's simulate a large dataset on the server (outside of our component)
-const serverData = makeData(10000)
+// const serverData = makeData(10000)
 
 const App = () => {
     const [data, setData] = useState([]);
     const [loading,setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [pageCount, setPageCount] = useState(10); //TODO NEED TO SET THIS
+    const [pageCount, setPageCount] = useState(1);
 
     // const fetchIdRef = React.useRef(0);
 
@@ -30,13 +30,18 @@ const App = () => {
     //     // setData(contacts);
     // }
 
+    // const fetchDataRequest = {
+    //     pageCount: 1,
+    //     pageSize: 5
+    // }
+
     const fetchData = useCallback(({ pageSize, pageIndex }) => {
         // This will get called when the table needs new data
         // You could fetch your data from literally anywhere,
         // even a server. But for this example, we'll just fake it.
 
         // Give this fetch an ID
-        const fetchId = ++fetchIdRef.current
+        // const fetchId = ++fetchIdRef.current
 
         // Set the loading state
         setLoading(true);
@@ -57,29 +62,25 @@ const App = () => {
         //     }
         // }, 1000)
 
-        const fetchDataRequest = {
-            pageCount: 1,
-            pageSize: 5
-        }
-
-        axios.post('http://localhost:8081/api/fetchData',fetchDataRequest)
+        axios.post('http://localhost:8081/api/fetchData',{ pageSize, pageIndex })
             .then(response => {
 
                 //get the data from response
                 const body = response.data;
 
                 //access the JSON data from body
-                // const employees = body.employeeModels;
-
-                //set pageCount, pageSize ???
-
+                // setData(body.employeeModels);
                 setData(body.employeeModels);
+                //setting the Page Count
+                setPageCount(body.pageCount);
+
                 setLoading(false);
                 setError(false);
 
             })
             .catch(() => {
                 setData([]);
+                setPageCount(0)
                 setLoading(false);
                 setError(false);
             });

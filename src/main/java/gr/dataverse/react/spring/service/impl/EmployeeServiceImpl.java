@@ -3,8 +3,8 @@ package gr.dataverse.react.spring.service.impl;
 import gr.dataverse.react.spring.entity.Employee;
 import gr.dataverse.react.spring.mapper.EmployeeMapper;
 import gr.dataverse.react.spring.model.EmployeeModel;
-import gr.dataverse.react.spring.model.EmployeeModelResponse;
-import gr.dataverse.react.spring.model.EmployeeModelRequest;
+import gr.dataverse.react.spring.model.TableEmployeeFetchResponse;
+import gr.dataverse.react.spring.model.TableFetchRequest;
 import gr.dataverse.react.spring.repository.EmployeeRepository;
 import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,23 +46,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeModelResponse createEmployeeResponse(EmployeeModelRequest employeeModelRequest) {
+    public TableEmployeeFetchResponse fetchEmployeeData(TableFetchRequest tableFetchRequest) {
 
-        Pageable pageable = PageRequest.of(employeeModelRequest.getPageCount() - 1, employeeModelRequest.getPageSize(), Sort.by("id").descending());
+//        Pageable pageable = PageRequest.of(employeeModelRequest.getPageCount() - 1, employeeModelRequest.getPageSize(), Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(tableFetchRequest.getPageIndex(), tableFetchRequest.getPageSize(), Sort.by("id").descending());
 //        Specification<Employee> specification;
 
-        List<EmployeeModel> employeeModelList = new ArrayList<>();
-        List<Employee> employeeList = employeeRepository.findAll(pageable).getContent();
-//        List<Employee> employeeList = employeeRepository.findAll(pageable);
+        List<Employee> employeeList = employeeRepository.findAll();
 
-        for (Employee employee : employeeList) {
+        List<Employee> employeeListPageable = employeeRepository.findAll(pageable).getContent();
+
+        List<EmployeeModel> employeeModelList = new ArrayList<>();
+
+        for (Employee employee : employeeListPageable) {
             employeeModelList.add(EmployeeMapper.toEmployeeModel(employee));
         }
 
+        //TOTAL RECORDS
+        int recordsTotal = employeeList.size();
 
-        EmployeeModelResponse employeeModelResponse = new EmployeeModelResponse(
-                employeeModelList, employeeModelList.size(), 0, 0,0);
+        //JSON PAGE SIZE
+        int pageSize = tableFetchRequest.getPageSize();
 
-        return employeeModelResponse;
+        //TOTAL PAGES calculation
+        int pageCount = (int) Math.ceil((double) employeeList.size() / (double) pageSize);
+
+        return new TableEmployeeFetchResponse(employeeModelList, pageCount, recordsTotal, 0);
     }
 }
