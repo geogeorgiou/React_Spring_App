@@ -2,9 +2,9 @@ package gr.dataverse.react.spring.model;
 
 import java.util.List;
 
-public class TableEmployeeFetchResponse {
+public class TableFetchResponse<T> {
 
-    private List<EmployeeModel> employeeModels;
+    private List<T> entityModels;
 
     private int pageCount;
 
@@ -12,19 +12,19 @@ public class TableEmployeeFetchResponse {
 
     private int recordsFiltered;
 
-    public TableEmployeeFetchResponse(List<EmployeeModel> employeeModels, int pageCount, int recordsTotal, int recordsFiltered) {
-        this.employeeModels = employeeModels;
+    public TableFetchResponse(List<T> entityModels, int pageCount, int recordsTotal, int recordsFiltered) {
+        this.entityModels = entityModels;
         this.pageCount = pageCount;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;
     }
 
-    public List<EmployeeModel> getEmployeeModels() {
-        return employeeModels;
+    public List<T> getEntityModels() {
+        return entityModels;
     }
 
-    public void setEmployeeModels(List<EmployeeModel> employeeModels) {
-        this.employeeModels = employeeModels;
+    public void setEntityModels(List<T> entityModels) {
+        this.entityModels = entityModels;
     }
 
     public int getPageCount() {

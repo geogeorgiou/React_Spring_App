@@ -93,7 +93,7 @@ class DashboardNavbar extends Component{
                         {/*</Button>*/}
 
                         <CustomButton size="lg" onClick={() => this.newRequestModalToggler()}>
-                            <AddIcon className="mt-2"/> {messages.dashboard.newRequest}
+                            <AddIcon /> {messages.dashboard.newRequest}
                         </CustomButton>
 
                         {/*<CustomButton btntype="dash-primary" size="lg" onClick={() => this.newRequestModalToggler()}>*/}

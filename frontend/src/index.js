@@ -8,6 +8,10 @@ import './index.css';
 import './styles/css/custom-btsp.scss'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
+
+//setting up baseURL HTTP requests
+axios.defaults.baseURL = 'http://localhost:8081';
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 

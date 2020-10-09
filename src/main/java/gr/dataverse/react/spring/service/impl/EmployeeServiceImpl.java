@@ -3,16 +3,15 @@ package gr.dataverse.react.spring.service.impl;
 import gr.dataverse.react.spring.entity.Employee;
 import gr.dataverse.react.spring.mapper.EmployeeMapper;
 import gr.dataverse.react.spring.model.EmployeeModel;
-import gr.dataverse.react.spring.model.TableEmployeeFetchResponse;
 import gr.dataverse.react.spring.model.TableFetchRequest;
+import gr.dataverse.react.spring.model.TableFetchResponse;
 import gr.dataverse.react.spring.repository.EmployeeRepository;
 import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +45,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public TableEmployeeFetchResponse fetchEmployeeData(TableFetchRequest tableFetchRequest) {
+    public TableFetchResponse<EmployeeModel> fetchEmployeeData(TableFetchRequest tableFetchRequest) {
 
-//        Pageable pageable = PageRequest.of(employeeModelRequest.getPageCount() - 1, employeeModelRequest.getPageSize(), Sort.by("id").descending());
         Pageable pageable = PageRequest.of(tableFetchRequest.getPageIndex(), tableFetchRequest.getPageSize(), Sort.by("id").descending());
-//        Specification<Employee> specification;
+//        Specification<Employee> specification; for later use...
 
         List<Employee> employeeList = employeeRepository.findAll();
 
@@ -71,6 +69,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         //TOTAL PAGES calculation
         int pageCount = (int) Math.ceil((double) employeeList.size() / (double) pageSize);
 
-        return new TableEmployeeFetchResponse(employeeModelList, pageCount, recordsTotal, 0);
+        return new TableFetchResponse<>(employeeModelList, pageCount, recordsTotal, 0);
     }
 }

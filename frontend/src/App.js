@@ -17,7 +17,7 @@ const App = () => {
     const [data, setData] = useState([]);
     const [loading,setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [pageCount, setPageCount] = useState(1);
+    const [pageCount, setPageCount] = useState(1);  //TO be changed to set initial number of pages
 
     // const fetchIdRef = React.useRef(0);
 
@@ -62,7 +62,7 @@ const App = () => {
         //     }
         // }, 1000)
 
-        axios.post('http://localhost:8081/api/fetchData',{ pageSize, pageIndex })
+        axios.post('/api/fetchData',{ pageSize, pageIndex })
             .then(response => {
 
                 //get the data from response
@@ -70,7 +70,7 @@ const App = () => {
 
                 //access the JSON data from body
                 // setData(body.employeeModels);
-                setData(body.employeeModels);
+                setData(body.entityModels);
                 //setting the Page Count
                 setPageCount(body.pageCount);
 
