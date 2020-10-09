@@ -19,7 +19,7 @@ const App = () => {
     const [error, setError] = useState(false);
     const [pageCount, setPageCount] = useState(10); //TODO NEED TO SET THIS
 
-    const fetchIdRef = React.useRef(0);
+    // const fetchIdRef = React.useRef(0);
 
     // const doFetch = async () => {
     //     // const response = await axios.get('https://randomuser.me/api/?results=100');
@@ -42,42 +42,47 @@ const App = () => {
         setLoading(true);
 
         // We'll even set a delay to simulate a server here
-        setTimeout(() => {
-            // Only update the data if this is the latest fetch
-            if (fetchId === fetchIdRef.current) {
-                const startRow = pageSize * pageIndex
-                const endRow = startRow + pageSize
-                setData(serverData.slice(startRow, endRow))
+        // setTimeout(() => {
+        //     // Only update the data if this is the latest fetch
+        //     if (fetchId === fetchIdRef.current) {
+        //         const startRow = pageSize * pageIndex
+        //         const endRow = startRow + pageSize
+        //         setData(serverData.slice(startRow, endRow))
+        //
+        //         // Your server could send back total page count.
+        //         // For now we'll just fake it, too
+        //         setPageCount(Math.ceil(serverData.length / pageSize))
+        //
+        //         setLoading(false)
+        //     }
+        // }, 1000)
 
-                // Your server could send back total page count.
-                // For now we'll just fake it, too
-                setPageCount(Math.ceil(serverData.length / pageSize))
+        const fetchDataRequest = {
+            pageCount: 1,
+            pageSize: 5
+        }
 
-                setLoading(false)
-            }
-        }, 1000)
+        axios.post('http://localhost:8081/api/fetchData',fetchDataRequest)
+            .then(response => {
 
-        // axios.get('https://randomuser.me/api/?results=5')
-        //     .then(response => {
-        //
-        //         //get the data from response
-        //         const body = response.data;
-        //
-        //         //access the JSON data from body
-        //         const contacts = body.results;
-        //
-        //         //set pageCount, pageSize ???
-        //
-        //         setData(contacts);
-        //         setLoading(false);
-        //         setError(false);
-        //
-        //     })
-        //     .catch(() => {
-        //         setData([]);
-        //         setLoading(false);
-        //         setError(false);
-        //     });
+                //get the data from response
+                const body = response.data;
+
+                //access the JSON data from body
+                // const employees = body.employeeModels;
+
+                //set pageCount, pageSize ???
+
+                setData(body.employeeModels);
+                setLoading(false);
+                setError(false);
+
+            })
+            .catch(() => {
+                setData([]);
+                setLoading(false);
+                setError(false);
+            });
 
     }, [])
 
@@ -85,7 +90,7 @@ const App = () => {
         () => [
             {
                 Header: messages.title,
-                accessor: 'employeeModels.id',
+                accessor: 'id',
                 // disableSortBy: true,
                 // Filter: SelectColumnFilter,
                 // filter: 'equals',
@@ -113,19 +118,19 @@ const App = () => {
             },
             {
                 Header: messages.firstName,
-                accessor: 'employeeModels.name',
+                accessor: 'name',
             },
             {
                 Header: messages.lastName,
-                accessor: 'employeeModels.department',
+                accessor: 'department',
             },
             {
                 Header: 'Email',
-                accessor: 'employeeModels.dob',
+                accessor: 'dob',
             },
             {
                 Header: messages.city,
-                accessor: 'employeeModels.gender',
+                accessor: 'gender',
             }
         ],
         []
