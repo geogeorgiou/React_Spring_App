@@ -1,8 +1,8 @@
-package gr.dataverse.react.spring.model;
+package gr.dataverse.react.spring.json;
 
 public class TableFetchRequest {
 
-    int pageSize;
+    int pageSize;   //zero Indexed pageSize
     int pageIndex;
 
     public TableFetchRequest(int pageSize, int pageIndex) {

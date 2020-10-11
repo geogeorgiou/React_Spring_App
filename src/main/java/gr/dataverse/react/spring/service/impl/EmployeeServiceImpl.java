@@ -3,8 +3,8 @@ package gr.dataverse.react.spring.service.impl;
 import gr.dataverse.react.spring.entity.Employee;
 import gr.dataverse.react.spring.mapper.EmployeeMapper;
 import gr.dataverse.react.spring.model.EmployeeModel;
-import gr.dataverse.react.spring.model.TableFetchRequest;
-import gr.dataverse.react.spring.model.TableFetchResponse;
+import gr.dataverse.react.spring.json.TableFetchRequest;
+import gr.dataverse.react.spring.json.TableFetchResponse;
 import gr.dataverse.react.spring.repository.EmployeeRepository;
 import gr.dataverse.react.spring.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +50,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         Pageable pageable = PageRequest.of(tableFetchRequest.getPageIndex(), tableFetchRequest.getPageSize(), Sort.by("id").descending());
 //        Specification<Employee> specification; for later use...
 
+        //find all employees
         List<Employee> employeeList = employeeRepository.findAll();
 
+        //find all employees that belong to the page
         List<Employee> employeeListPageable = employeeRepository.findAll(pageable).getContent();
 
         List<EmployeeModel> employeeModelList = new ArrayList<>();
 
+        //convert pageable employees to model
         for (Employee employee : employeeListPageable) {
             employeeModelList.add(EmployeeMapper.toEmployeeModel(employee));
         }

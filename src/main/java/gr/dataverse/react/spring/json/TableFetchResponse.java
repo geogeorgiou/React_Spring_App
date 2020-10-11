@@ -1,4 +1,4 @@
-package gr.dataverse.react.spring.model;
+package gr.dataverse.react.spring.json;
 
 import java.util.List;
 
