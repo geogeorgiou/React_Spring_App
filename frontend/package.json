@@ -2,7 +2,6 @@
   "name": "spring-react-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8081",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -12,6 +11,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "clsx": "^1.1.1",
+    "lodash": "^4.17.20",
     "namor": "^2.0.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",

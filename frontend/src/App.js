@@ -7,6 +7,7 @@ import TableContainer from './TableContainer';
 import axios from 'axios';
 
 import clsx from "clsx";
+import {EmployeeApi} from './services/api/endpoints/Employee/Employee'
 import {messages} from "./messages/messages";
 // import makeData from "./makeData";
 
@@ -62,7 +63,8 @@ const App = () => {
         //     }
         // }, 1000)
 
-        axios.post('/api/fetchData',{ pageSize, pageIndex })
+        // axios.post('/api/fetchData',{ pageSize, pageIndex })
+        EmployeeApi.indexPageable({ pageSize, pageIndex })
             .then(response => {
 
                 //get the data from response

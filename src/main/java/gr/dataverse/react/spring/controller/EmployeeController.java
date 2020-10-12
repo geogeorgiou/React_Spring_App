@@ -50,7 +50,7 @@ public class EmployeeController {
         return employee;
     }
 
-    @PostMapping("/fetchData")
+    @PostMapping("/indexPageable")
     public ResponseEntity< TableFetchResponse<EmployeeModel> > postRequestUpdate(@RequestBody TableFetchRequest tableFetchRequest) {
 
         try
