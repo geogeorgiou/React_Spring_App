@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import Aux from './hoc/Auxiliary/Auxiliary'
-import DashboardNavbar from "./components/Dashboard/Navbar/DashboardNavbar";
-import DashboardFilterNavbar from  './components/Dashboard/Navbar/DashboardFilterNavbar'
+import DashboardNavbar from "./containers/Dashboard/Navbar/DashboardNavbar";
+import DashboardFilterNavbar from './containers/Dashboard/Navbar/DashboardFilterNavbar'
 import { Container } from 'reactstrap';
-import TableContainer from './TableContainer';
+import TableContainer from './components/UI/TableContainer/TableContainer';
 import axios from 'axios';
 
 import clsx from "clsx";

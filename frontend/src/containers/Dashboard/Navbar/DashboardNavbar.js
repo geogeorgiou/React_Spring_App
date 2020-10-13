@@ -14,8 +14,8 @@ import {
 } from 'reactstrap';
 
 import DrawerNavbar from "./DrawerNavbar";
-import NewRequestModal from "../../Modal/NewRequestModal";
-import CustomButton from "../../UI/Buttons/CustomButton";
+import NewRequestModal from "../../../components/Modal/NewRequestModal";
+import CustomButton from "../../../components/UI/Buttons/CustomButton";
 
 import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';

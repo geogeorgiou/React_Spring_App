@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect} from 'react';
 import {useTable, usePagination} from 'react-table';
-import Loader from './components/UI/Loader/Loader'
+import Loader from '../Loader/Loader'
 
-import {messages} from "./messages/messages";
+import {messages} from "../../../messages/messages";
 
 import {Button, Col, CustomInput, Row, Table} from 'reactstrap';
 // import { Filter, DefaultColumnFilter } from './filters';

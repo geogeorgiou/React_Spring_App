@@ -1,25 +1,28 @@
 import React from 'react';
+import { Input, Label} from 'reactstrap';
 
 const input = (props) => {
 
     let inputElement = null;
+    let inputType = props.elementConfig.type;
 
-    switch (props.inputType) {
+    switch (props.elementType) {
         case ('input'):
-            inputElement = <input {...props}/>;
+            inputElement = <Input type={inputType} {...props}/>;
             break;
         case('textarea'):
             inputElement = <textarea {...props}/>;
             break;
+        //dropdown? checkbox
         default:
-            inputElement = <input {...props}/>
+            inputElement = <Input type="text" {...props}/>
 
     }
 
 
     return(
         <div>
-            <label>{props.label}</label>
+            <Label>{props.label}</Label>
             {inputElement}
         </div>
     );
