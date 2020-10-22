@@ -151,7 +151,6 @@
 						<configuration>
 							<target>
 								<copy todir="${project.build.directory}/classes/public">
-							<!--	<copy todir="${project.build.outputDirectory}/classes/public"> -->
 									<fileset dir="${project.basedir}/frontend/build"/>
 								</copy>
 							</target>
@@ -162,6 +161,40 @@
 					</execution>
 				</executions>
 			</plugin>
+
+
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-war-plugin</artifactId>-->
+<!--				<configuration>-->
+<!--					<webResources>-->
+<!--						<resource>-->
+<!--							<directory>${basedir}/src/main/java</directory>-->
+<!--							<targetPath>WEB-INF/classes</targetPath>-->
+<!--							<includes>-->
+<!--								<include>**/*.properties</include>-->
+<!--								<include>**/*.xml</include>-->
+<!--								<include>**/*.css</include>-->
+<!--								<include>**/*.html</include>-->
+<!--								<include>**/*.pdf</include>-->
+<!--							</includes>-->
+<!--						</resource>-->
+<!--						<resource>-->
+<!--							<directory>${basedir}/lib</directory>-->
+<!--							<targetPath>WEB-INF/lib</targetPath>-->
+<!--							<includes>-->
+<!--								<include>**/*.jar</include>-->
+<!--							</includes>-->
+<!--						</resource>-->
+<!--					</webResources>-->
+<!--					<failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--					<archive>-->
+<!--						<manifest>-->
+<!--							<addDefaultImplementationEntries>false</addDefaultImplementationEntries>-->
+<!--						</manifest>-->
+<!--					</archive>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
