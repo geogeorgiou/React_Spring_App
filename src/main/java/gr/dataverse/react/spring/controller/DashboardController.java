@@ -6,9 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DashboardController {
 
-    @RequestMapping("/view")
-    public String getDashboardView(){
-        return "redirect:/view";
-    }
+//    @RequestMapping("/view")
+//    public String getDashboardView(){
+//        return "redirect:/view";
+//    }
 
+    //implementing a catch all Route and let React handle
+    //and parse the URL changes!!!
+
+    @RequestMapping("/")
+    public String getHomePage(){
+        return "redirect:/index";
+    }
 }
