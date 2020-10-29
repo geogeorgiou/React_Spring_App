@@ -1,5 +1,5 @@
 {
-  "employees": [
+  "employee": [
     {
       "id": 1,
       "department": "MOCK React",
@@ -27,26 +27,6 @@
       "gender": "Male",
       "dob": "1998-04-02T18:11:54.000Z",
       "id": 4
-    },
-    {
-      "name": "Georgios Georgiou",
-      "department": "React Me",
-      "gender": "Male",
-      "dob": {
-        "dispatchConfig": null,
-        "_targetInst": null,
-        "_dispatchListeners": null,
-        "_dispatchInstances": null,
-        "nativeEvent": null,
-        "type": null,
-        "target": null,
-        "eventPhase": null,
-        "bubbles": null,
-        "cancelable": null,
-        "defaultPrevented": null,
-        "isTrusted": null
-      },
-      "id": 5
     }
   ]
 }
