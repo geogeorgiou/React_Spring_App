@@ -10,7 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import axios from 'axios';
+// import axios from 'axios';
+import {employeeApi} from '../services/endpoints/employeeApi';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -71,7 +72,8 @@ export default function AddEmployee() {
     //   body: JSON.stringify(toInput) // body data type must match "Content-Type" header
     // });
     // let body = await response.json();
-    const response = await axios.post('/employee', toInput);
+    // const response = await axios.post('/employee', toInput);
+    const response = await employeeApi.create(toInput);
     let body = await response.data;
     setMessage(body.id ? "Data successfully updated" : "Update failed");
   }

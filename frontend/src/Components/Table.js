@@ -13,7 +13,8 @@ import {Link} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import axios from 'axios';
+// import axios from 'axios';
+import {employeeApi} from '../services/endpoints/employeeApi';
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -52,7 +53,8 @@ export default function SimpleTable() {
     let isLoading = true;
 
     async function sampleFunc() {
-        let response = await axios.get('/employee');
+        // let response = await axios.get('/employee');
+        let response = await employeeApi.index();
         let data = await response.data;
         upDateData(data);
     }
