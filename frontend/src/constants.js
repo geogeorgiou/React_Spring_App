@@ -1,32 +1,26 @@
 
 //this is the config file
 //we setup the environmental constants here
-//THESE DO TAKE INTO ACCOUNT SERVER CONTEXT ROOT so please add it
+//THESE DO TAKE INTO ACCOUNT SERVER CONTEXT ROOT so please add it in the .env.XXX (XXX is the environment)
 
 //***************************************
-// npm start
-// process.env.NODE_ENV = 'development'
+// npm start-front
+// ENV = 'frontend'
 
-// npm test
-// process.env.NODE_ENV = 'test'
+// npm start-dev
+// ENV = 'development'
 
-// npm run build
-// process.env.NODE_ENV = 'production
+// npm build-prod
+// ENV = 'production'
 //***************************************
 
+//environmental config json
 
-const dev = {
+const env = {
     url: {
-        ROOT_BASE_URL: 'http://localhost:8081/saadekef',
-    }
-};
-
-//TODO to be changed for prod environment
-
-const prod = {
-    url: {
-        ROOT_BASE_URL: 'http://localhost:8081/saadekef',
+        ROOT_BASE_URL: process.env.REACT_APP_ROOT_BASE_URL
     }
 }
 
-export const config = process.env.NODE_ENV === 'development' ? dev : prod;
+export const config = env;
+
