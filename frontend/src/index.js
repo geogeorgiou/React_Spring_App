@@ -15,7 +15,7 @@ export const browserHistory = createBrowserHistory({
     basename: process.env.PUBLIC_URL
 });
 
-axios.defaults.baseURL = config.url.ROOT_BASE_URL;
+axios.defaults.baseURL = config.url.API_BASE_URL;
 
 
 ReactDOM.render(

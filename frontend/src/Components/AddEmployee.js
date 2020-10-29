@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import axios from 'axios';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(7),
@@ -54,30 +56,32 @@ export default function AddEmployee() {
   const [message, setMessage] = React.useState("Nothing saved in the session");
 
   async function sampleFunc(toInput) {
-    const response = await fetch("/api/employee", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, *cors, same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": "application/json"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(toInput) // body data type must match "Content-Type" header
-    });
-    let body = await response.json();
-    console.log(body.id);
-    setMessage(body.id ? "Data sucessfully updated" : "Data updation failed");
+    // const response = await fetch("/api/employee", {
+    // const response = await fetch(process.env.REACT_APP_ENVIRONMENT === 'frontend' ? '/employees' : '/employee' , {
+    //   method: "POST", // *GET, POST, PUT, DELETE, etc.
+    //   mode: "cors", // no-cors, *cors, same-origin
+    //   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    //   credentials: "same-origin", // include, *same-origin, omit
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //     // 'Content-Type': 'application/x-www-form-urlencoded',
+    //   },
+    //   redirect: "follow", // manual, *follow, error
+    //   referrerPolicy: "no-referrer", // no-referrer, *client
+    //   body: JSON.stringify(toInput) // body data type must match "Content-Type" header
+    // });
+    // let body = await response.json();
+    const response = await axios.post('/employee', toInput);
+    let body = await response.data;
+    setMessage(body.id ? "Data successfully updated" : "Update failed");
   }
 
   const handleSubmit = variables => {
     const toInput = { name, department, gender, dob: selectedDate };
     sampleFunc(toInput);
-    setName("");
-    setDepartment("");
-    setGender("");
+    // setName(toInput.name);
+    // setDepartment(toInput.department);
+    // setGender(toInput.gender);
   };
 
   if (firstLoad) {
@@ -155,7 +159,6 @@ export default function AddEmployee() {
             fullWidth
             variant="contained"
             color="primary"
-            preventDefault
             className={classes.submit}
             onClick={handleSubmit}
           >

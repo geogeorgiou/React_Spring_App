@@ -1,0 +1,52 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "department": "MOCK React",
+      "dob": "2020-10-08",
+      "gender": "male",
+      "name": "MOCK Geo"
+    },
+    {
+      "id": 2,
+      "department": "MOCK Angular",
+      "dob": "2020-10-08",
+      "gender": "male",
+      "name": "MOCK Manos"
+    },
+    {
+      "id": 3,
+      "department": "MOCK Vue",
+      "dob": "2020-10-08",
+      "gender": "male",
+      "name": "MOCK Kostas"
+    },
+    {
+      "name": "MoCk EmP",
+      "department": "MoCk ReAcT",
+      "gender": "Male",
+      "dob": "1998-04-02T18:11:54.000Z",
+      "id": 4
+    },
+    {
+      "name": "Georgios Georgiou",
+      "department": "React Me",
+      "gender": "Male",
+      "dob": {
+        "dispatchConfig": null,
+        "_targetInst": null,
+        "_dispatchListeners": null,
+        "_dispatchInstances": null,
+        "nativeEvent": null,
+        "type": null,
+        "target": null,
+        "eventPhase": null,
+        "bubbles": null,
+        "cancelable": null,
+        "defaultPrevented": null,
+        "isTrusted": null
+      },
+      "id": 5
+    }
+  ]
+}

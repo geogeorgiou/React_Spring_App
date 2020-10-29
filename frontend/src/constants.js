@@ -18,7 +18,8 @@
 
 const env = {
     url: {
-        ROOT_BASE_URL: process.env.REACT_APP_ROOT_BASE_URL
+        ROOT_BASE_URL: process.env.REACT_APP_ROOT_BASE_URL,
+        API_BASE_URL: process.env.REACT_APP_API_BASE_URL
     }
 }
 

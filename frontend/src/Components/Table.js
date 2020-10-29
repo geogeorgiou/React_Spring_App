@@ -52,7 +52,7 @@ export default function SimpleTable() {
     let isLoading = true;
 
     async function sampleFunc() {
-        let response = await axios.get('/api/employee');
+        let response = await axios.get('/employee');
         let data = await response.data;
         upDateData(data);
     }
