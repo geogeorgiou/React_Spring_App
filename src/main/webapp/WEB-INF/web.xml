@@ -1,0 +1,64 @@
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <display-name>Example Security AMS</display-name>
+
+<!--    Error Page handling binds with ReactRouter-->
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/classes/static/index.html</location>
+    </error-page>
+
+
+    <!-- DataSource -->
+
+<!--    <resource-ref>-->
+<!--        <description>Reference to DS</description>-->
+<!--        <res-ref-name>jdbc/amsDS</res-ref-name>-->
+<!--        <res-type>javax.sql.DataSource</res-type>-->
+<!--        <res-auth>Container</res-auth>-->
+<!--        <res-sharing-scope>Shareable</res-sharing-scope>-->
+<!--    </resource-ref>-->
+
+    <!-- Other settings -->
+
+<!--    <session-config>-->
+<!--        <session-timeout>5</session-timeout>-->
+
+<!--    </session-config>-->
+
+    <locale-encoding-mapping-list>
+        <locale-encoding-mapping>
+            <locale>el</locale>
+            <encoding>UTF-8</encoding>
+        </locale-encoding-mapping>
+        <locale-encoding-mapping>
+            <locale>en</locale>
+            <encoding>UTF-8</encoding>
+        </locale-encoding-mapping>
+    </locale-encoding-mapping-list>
+
+    <!--<welcome-file-list>
+        <welcome-file>/pages/security/process_login.jsp</welcome-file>
+    </welcome-file-list>-->
+
+
+
+<!--    <security-role>-->
+<!--        <role-name>Individual</role-name>-->
+<!--    </security-role>-->
+
+<!--    <security-role>-->
+<!--        <role-name>Admin</role-name>-->
+<!--    </security-role>-->
+
+
+<!--    <login-config>-->
+<!--        <auth-method>CLIENT-CERT</auth-method>-->
+<!--        <realm-name>myrealm</realm-name>-->
+<!--    </login-config>-->
+
+</web-app>

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "tb_emp")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column
     private int id;
     @Column
@@ -20,7 +20,7 @@ public class Employee {
     @Column
     private String department;
     @Column
-    private Date dob;
+    private String dob;
     @Column
     private String gender;
     @Override
@@ -28,33 +28,43 @@ public class Employee {
         return "Employee [id= " + id + ", name=" + name + ", department=" + department + ", dob=" + dob + ", gender="
                 + gender + "]";
     }
-    public Integer getId() {
+
+    public int getId() {
         return id;
     }
-    public void setId(Integer id) {
+
+    public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getDepartment() {
         return department;
     }
+
     public void setDepartment(String department) {
         this.department = department;
     }
-    public Date getDob() {
+
+    public String getDob() {
         return dob;
     }
-    public void setDob(Date dob) {
+
+    public void setDob(String dob) {
         this.dob = dob;
     }
+
     public String getGender() {
         return gender;
     }
+
     public void setGender(String gender) {
         this.gender = gender;
     }

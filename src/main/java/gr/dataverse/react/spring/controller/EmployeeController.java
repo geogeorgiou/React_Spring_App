@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-//@RequestMapping("/saadekef/api")
-
 //THIS DOES TAKE INTO ACCOUNT THE CONTEXT ROOT so omit it!
+
+@RestController
 @RequestMapping("/api")
 //@CrossOrigin(origins="http://localhost:3000")
 public class EmployeeController {

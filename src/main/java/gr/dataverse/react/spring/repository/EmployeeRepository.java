@@ -16,6 +16,8 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 //    List<Employee> getEmployeePageable(Pageable pageable);
 //    void save(Employee emp);
     Optional<Employee> findById(int id);
+//
+//    Employee findById(int id);
     void deleteById(int id);
 
 }

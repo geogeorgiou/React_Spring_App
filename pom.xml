@@ -38,10 +38,24 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.jdbc</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>6</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
+		</dependency>
+
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-data-rest</artifactId>-->
 <!--		</dependency>-->
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,11 +63,11 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -72,12 +86,12 @@
 			<version>2.11.3</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>2.7.0</version>
-		</dependency>
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.mariadb.jdbc</groupId>-->
+<!--			<artifactId>mariadb-java-client</artifactId>-->
+<!--			<version>2.7.0</version>-->
+<!--		</dependency>-->
 
 
 		<!--		<dependency>-->
@@ -108,7 +122,7 @@
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.10.3</version>
 				<configuration>
-					<workingDirectory>frontend/</workingDirectory>
+					<workingDirectory>frontend</workingDirectory>
 					<installDirectory>target</installDirectory>
 				</configuration>
 				<executions>
@@ -143,60 +157,82 @@
 				</executions>
 			</plugin>
 
-<!--		automatically, we’ll use a plugin called
-			maven-antrun-plugin to set the resources-->
+<!--			plugin to copy frontend/build resources to static-->
 			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
+				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>generate-resources</phase>
-						<configuration>
-							<target>
-								<copy todir="${project.build.directory}/classes/static">
-									<fileset dir="${project.basedir}/frontend/build"/>
-								</copy>
-							</target>
-						</configuration>
+						<id>copy-resources</id>
+						<phase>process-classes</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>copy-resources</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>frontend/build</directory>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
-
+<!--		automatically, we’ll use a plugin called
+			maven-antrun-plugin to set the resources-->
 <!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-war-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<webResources>-->
-<!--						<resource>-->
-<!--							<directory>${basedir}/src/main/java</directory>-->
-<!--							<targetPath>WEB-INF/classes</targetPath>-->
-<!--							<includes>-->
-<!--								<include>**/*.properties</include>-->
-<!--								<include>**/*.xml</include>-->
-<!--								<include>**/*.css</include>-->
-<!--								<include>**/*.html</include>-->
-<!--								<include>**/*.pdf</include>-->
-<!--							</includes>-->
-<!--						</resource>-->
-<!--						<resource>-->
-<!--							<directory>${basedir}/lib</directory>-->
-<!--							<targetPath>WEB-INF/lib</targetPath>-->
-<!--							<includes>-->
-<!--								<include>**/*.jar</include>-->
-<!--							</includes>-->
-<!--						</resource>-->
-<!--					</webResources>-->
-<!--					<failOnMissingWebXml>false</failOnMissingWebXml>-->
-<!--					<archive>-->
-<!--						<manifest>-->
-<!--							<addDefaultImplementationEntries>false</addDefaultImplementationEntries>-->
-<!--						</manifest>-->
-<!--					</archive>-->
-<!--				</configuration>-->
+<!--				<artifactId>maven-antrun-plugin</artifactId>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>generate-resources</phase>-->
+<!--						<configuration>-->
+<!--							<target>-->
+<!--								<copy todir="${project.build.directory}/classes/static">-->
+<!--									<fileset dir="${project.basedir}/frontend/build"/>-->
+<!--								</copy>-->
+<!--							</target>-->
+<!--						</configuration>-->
+<!--						<goals>-->
+<!--							<goal>run</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
 <!--			</plugin>-->
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>${basedir}/src/main/java</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<includes>
+								<include>**/*.properties</include>
+								<include>**/*.xml</include>
+								<include>**/*.css</include>
+								<include>**/*.html</include>
+								<include>**/*.pdf</include>
+							</includes>
+						</resource>
+						<resource>
+							<directory>${basedir}/lib</directory>
+							<targetPath>WEB-INF/lib</targetPath>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
