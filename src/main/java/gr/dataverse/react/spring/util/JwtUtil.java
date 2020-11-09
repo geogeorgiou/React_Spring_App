@@ -54,6 +54,10 @@ public class JwtUtil {
                 .setExpiration(new Date(expMillis))
                 .signWith(signatureAlgorithm, signingKey);
 
+        //could also add custom claims here
+//        builder.claim("vat", "12121212");
+//        builder.claim("name", "whatever");
+
         //if it has been specified, let's add the expiration
 //        if (ttlMillis >= 0) {
 //            long expMillis = nowMillis + ttlMillis;

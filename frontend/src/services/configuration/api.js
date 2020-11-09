@@ -24,6 +24,22 @@ const getHeaders = jsonHeaders => {
     return headers;
 };
 
+const getAuthHeaders = (jsonHeaders, authToken) => {
+
+    let headers = {
+        Accept: '*/*'
+    };
+
+    if (jsonHeaders)
+        headers['Accept'] = 'application/json';
+
+    if (authToken)
+        headers['Authorization'] = `${authToken.Authorization}`;
+
+
+    return headers;
+};
+
 
 
 const cleanNonTruthyParameters = obj => {
@@ -71,4 +87,12 @@ const makeRequestJSON = (method, path, params) =>
         data: params
     });
 
-export { makeRequest, makeRequestJSON };
+const makeAuthRequestJSON = (method, authConfig , path, params) =>
+    HTTP({
+        method,
+        headers: getAuthHeaders(JSON, authConfig),
+        url: path,
+        data: params
+    });
+
+export { makeRequest, makeRequestJSON, makeAuthRequestJSON };

@@ -40,8 +40,15 @@ public class JwtController {
     @PostMapping("/userAuth")
     public ResponseEntity<?> isUserAuth(HttpServletRequest request, HttpServletResponse response) {
 
+        boolean isAuthUser = userAuth.isUserAuth(request);
+        if (!isAuthUser){
+            return ResponseEntity
+                    .badRequest()
+                    .body("Error: user unauthorized!");
+        }
 
-        return ResponseEntity.ok("valid="+userAuth.isUserAuth(request));
+        return ResponseEntity.ok("valid");
+//        return ResponseEntity.ok("valid="+userAuth.isUserAuth(request));
     }
 
 

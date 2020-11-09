@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.kastkode.springsandwich.filter", "gr.dataverse.react.spring.*"})
+//@ComponentScan(basePackages = {"com.kastkode.springsandwich.filter", "gr.dataverse.react.spring.*"})
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args)  {

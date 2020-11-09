@@ -36,6 +36,7 @@ public class UserAuthUtil {
                 String jwt = authorization.substring("Bearer".length()).trim();
 //                logger.debug(jwt);
 
+                //this decodes and validates JWT (also throws exceptions if invalid)
                 jwtUtil.decodeJWT(jwt);
                 return true;
 
