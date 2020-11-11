@@ -1,5 +1,7 @@
 package gr.dataverse.react.spring.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import gr.dataverse.react.spring.entity.Employee;
 import gr.dataverse.react.spring.json.ReactSelectResponse;
 import gr.dataverse.react.spring.json.TableFetchRequest;
@@ -78,17 +80,22 @@ public class EmployeeController {
 
         List<Employee> empList = employeeService.findAll();
 
-        List<String> labels = new ArrayList<>();
-        List<String> values = new ArrayList<>();
+//        List<String> labels = new ArrayList<>();
+//        List<String> values = new ArrayList<>();
+//
+//        for (Employee employee : empList) {
+//            labels.add(String.valueOf(employee.getId()));
+//            values.add(employee.getDepartment());
+//        }
+//
+//        ReactSelectResponse reactSelectResponse = new ReactSelectResponse(labels, values);
 
-        for (Employee employee : empList) {
-            labels.add(String.valueOf(employee.getId()));
-            values.add(employee.getDepartment());
-        }
 
-        ReactSelectResponse reactSelectResponse = new ReactSelectResponse(labels, values);
+//        String json = "{ \"name\": \"Baeldung\", \"java\": true }";
+        String json = "{\"dropdownVals\": [{ \"label\": \"Baeldung\", \"value\": true },{ \"label\": \"Baeldung\", \"value\": true }]}";
+        JsonObject reactSelectResponse = new Gson().fromJson(json, JsonObject.class);
 
-        return ResponseEntity.ok(reactSelectResponse);
+        return ResponseEntity.ok(reactSelectResponse.toString());
     }
 
 }
