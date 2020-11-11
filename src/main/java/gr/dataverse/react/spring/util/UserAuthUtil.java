@@ -1,7 +1,7 @@
 package gr.dataverse.react.spring.util;
 
 
-import gr.dataverse.react.spring.filter.ConsoleLogger;
+//import gr.dataverse.react.spring.filter.ConsoleLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,14 @@ public class UserAuthUtil {
     @Autowired
     JwtUtil jwtUtil;
 
-    static Logger logger = LoggerFactory.getLogger(ConsoleLogger.class);
+//    static Logger logger = LoggerFactory.getLogger(ConsoleLogger.class);
 
     //Basic authentication Util that returns the user credentials in String Array
 
-    public boolean isUserAuth(HttpServletRequest httpRequest){
+    public boolean isUserAuth(HttpServletRequest httpRequest) {
 
 
-        try{
+        try {
 
             final String authorization = httpRequest.getHeader("Authorization");
 //            logger.debug("_**AUTHORIZATION**_"+authorization);
@@ -42,7 +42,7 @@ public class UserAuthUtil {
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
