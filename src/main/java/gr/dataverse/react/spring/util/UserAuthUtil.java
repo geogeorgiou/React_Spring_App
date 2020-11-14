@@ -20,7 +20,7 @@ public class UserAuthUtil {
 
     //Basic authentication Util that returns the user credentials in String Array
 
-    public boolean isUserAuth(HttpServletRequest httpRequest) {
+    public boolean isUserAuth(HttpServletRequest httpRequest){
 
 
         try {
